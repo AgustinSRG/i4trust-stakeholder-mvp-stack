@@ -127,3 +127,29 @@ Stop the services
 ```
 sudo docker compose down
 ```
+
+## Steps for development
+
+For development in local, run the following steps:
+
+ - Rename `.env.example` to `.env`
+ - Rename `config/kong.yaml.example` to `config/kong.yaml`
+ - Remove `nginx` and `activation-service` from `docker-compose.yml` if present (That is for production)
+ - Run `docker-compose up`
+ - When it's started, in another terminal run:
+   - `cd keyrock-wilma-config-script`
+   - `npm install`
+   - `cd ..`
+   - `node ./keyrock-wilma-config-script/index.js`
+ - Copy the `WILMA_*` env vars from the console output into `.env`
+ - Run `docker-compose down`
+
+After it's installed:
+
+ - Run `docker-compose up` to start the services, you should be able to access keyrock from `http://localhost:3000` and the other services in the other ports (check the `docker-compose.yml` file)
+ - To stop them, yse `docker-compose down`
+
+If for some reason it does not let you access keyrock (invalid username and password), try resetting it:
+
+ - Remove the `mongo-db` and `mysql` directories.
+ - Run the installation steps again.

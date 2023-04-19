@@ -2,7 +2,7 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 const path = require("path");
 
-dotenv.config({ path: path.dirname(__dirname) + path.sep + ".env" });
+dotenv.config({ path: path.resolve(__dirname, "..", ".env")});
 
 const keyrockAPIConfig = {
     baseURL: `http://localhost:${process.env.KEYROCK_PORT}/v1`,
@@ -112,9 +112,9 @@ async function main() {
     process.stdout.write(" OK\n\n");
 
     process.stdout.write("Update the .env file with the following values:\n\n");
-    process.stdout.write(`WILMA_APP_ID=${application.id}\n`);
-    process.stdout.write(`WILMA_APP_USERNAME=${pepProxy.id}\n`);
-    process.stdout.write(`WILMA_APP_PASSWORD=${pepProxy.password}\n\n`);
+    process.stdout.write(`WILMA_APP_ID=${JSON.stringify(application.id)}\n`);
+    process.stdout.write(`WILMA_APP_USERNAME=${JSON.stringify(pepProxy.id)}\n`);
+    process.stdout.write(`WILMA_APP_PASSWORD=${JSON.stringify(pepProxy.password)}\n\n`);
     process.stdout.write("Then restart the docker compose script:\n\n");
     process.stdout.write("sudo docker compose down\n");
     process.stdout.write("sudo docker compose up -d\n");
